@@ -108,7 +108,7 @@
     src: FreeBSD-rc.j2
     dest: '/usr/local/etc/rc.d/{{ node_app.name }}'
     mode: '0755'
-  when: node_start_app and node_app.script and ansible_os_family == "FreeBSD"
+  when: node_start_app and node_app.script and ansible_facts["os_family"] == "FreeBSD"
 
 - name: install systemd unit
   block:
@@ -118,7 +118,7 @@
         dest: '/home/{{ node_app.user }}/{{ node_app.name }}.service'
     - name: enable service
       command: 'systemctl enable /home/{{ node_app.user }}/{{ node_app.name }}.service'
-  when: node_start_app and node_app.script and ansible_os_family == "Debian"
+  when: node_start_app and node_app.script and ansible_facts["os_family"] == "Debian"
 
 - name: stop app
   service:

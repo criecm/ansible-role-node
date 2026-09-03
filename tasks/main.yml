@@ -4,12 +4,12 @@
   include_vars: '{{ item }}'
   with_first_found:
     - files:
-      - '{{ ansible_os_family }}.yml'
+      - '{{ ansible_facts["os_family"] }}.yml'
       skip: True
 
 # install node
-- name: 'install for {{ ansible_os_family }}'
-  include_tasks: '{{ ansible_os_family }}-install.yml'
+- name: 'install for {{ ansible_facts["os_family"] }}'
+  include_tasks: '{{ ansible_facts["os_family"] }}-install.yml'
 
 # install app(s)
 - name: 'app {{ oneapp.name }}'
